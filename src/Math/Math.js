@@ -15,8 +15,8 @@ export const Integral = () => {
   return <MathComponent tex={example} display={false} />
 }
 
-export let Math = (math) => {
-  return <MathComponent tex={math} display={false} />
+export let Math = (props) => {
+  return <MathComponent tex={props.value} display={false} />
 }
 
 export default area;
