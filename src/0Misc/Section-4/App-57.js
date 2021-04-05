@@ -1,44 +1,32 @@
+//Adding deletePersonHandler to delete each person
+
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-
-
-
 class App extends Component {
   state = {
     persons: [
-      {id: 'adgdg', name: 'Max', age: 28 },
-      {id: 'agadg', name: 'Manu', age: 29 },
-      {id: 'qqwre', name: 'Stephanie', age: 26 }
+      { name: 'Max', age: 28 },
+      { name: 'Manu', age: 29 },
+      { name: 'Stephanie', age: 26 }
     ],
     otherState: 'some other value',
     showPersons: false
   }
 
-  nameChangedHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex(p => {
-      return p.id === id
-    })
-
-    const person = {
-      ...this.state.persons[personIndex]
-    }
-
-    // const person = Object.assign({}, this.state.persons[personIndex])
-
-    person.name = event.target.value
-
-    const persons = [...this.state.persons]
-    persons[personIndex] = person
-    
-    this.setState({persons: persons})
+  nameChangedHandler = (event) => {
+    this.setState( {
+      persons: [
+        { name: 'Max', age: 28 },
+        { name: event.target.value, age: 29 },
+        { name: 'Stephanie', age: 26 }
+      ]
+    } )
   }
 
   deletePersonHandler = (personIndex) => {
-    // const persons = this.state.persons.slice();
-    //Use this para gumawa ng own copy ng array. Kasi yung sa L57 approach is gumamit ng pointer sa old array, meaning kung baguhin mo tong copy natin, mababago din yung lumang array kasi nga minanipulate niya ang old array. 
-    const persons = [...this.state.persons]
+    const persons = this.state.persons
     persons.splice(personIndex, 1)
     this.setState({persons: persons})
   }
@@ -66,13 +54,9 @@ class App extends Component {
           return <Person
             click={() => this.deletePersonHandler(index)} 
             name={person.name} 
-            age={person.age}
-            key={person.id}
-            changed={(event) => this.nameChangedHandler(event, person.id)}
-            />
+            age={person.age}/> 
         })}
-        
-      </div>      
+      </div>       
     )
   }
 
@@ -80,7 +64,7 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
-        <button style={style} onClick={() => this.togglePersonsHandler()}>Toggle Persons</button>
+        <button style={style} onClick={() => this.togglePersonsHandler()}>Switch Name</button>
         {persons}  
       </div>
     );
