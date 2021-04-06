@@ -1,3 +1,5 @@
+//Dynamically changing class name 
+
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
