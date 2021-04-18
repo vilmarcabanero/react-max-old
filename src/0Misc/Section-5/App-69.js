@@ -1,6 +1,42 @@
+//Using Radium for Media Queries
+
+
+//Person.js
+import React from 'react'
+import './Person.css'
+import Radium from 'radium'
+
+const Person = (props) => {
+  const style = {
+    '@media (min-width: 500px)': {
+      width: '450px'
+    }
+  }
+  return (
+    <div className='Person' style={style}>
+      <p onClick={props.click}>I'm {props.name} and I am {props.age}  years old!   </p> 
+      <p>{props.children}</p>
+      <input type='text' onChange={props.changed} value={props.name}/>
+    </div>  
+    
+  ) 
+}
+
+// @media (min-width: 500px) {
+//   .Person {
+//     width: 450px;
+//   }
+// }
+
+
+export default Radium(Person)
+
+
+//App.js
 import React, { Component } from 'react'
 import './App.css'
 import Person from './Person/Person'
+import Radium, {StyleRoot} from 'radium'
 
 
 
@@ -56,11 +92,11 @@ class App extends Component {
 		font: 'inherit',
 		border: '1px solid blue',
 		padding: '8px',
-		cursor: 'pointer'
-    // ':hover': {
-    //   backgroundColor: 'lightgreen',
-    //   color: 'black'
-    // }
+		cursor: 'pointer',
+    ':hover': {
+      backgroundColor: 'lightgreen',
+      color: 'black'
+    }
   }
   
   let persons = null;
@@ -97,17 +133,18 @@ class App extends Component {
   } 
 
     return (
+      <StyleRoot>
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p className={classes.join(' ')}>This is really working!</p>
         <button style={style} onClick={() => this.togglePersonsHandler()}>Toggle Persons</button>
         {persons}  
       </div>
+      </StyleRoot>
     )
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
-//Last commit.
+export default Radium(App)
 
-export default App

@@ -1,7 +1,10 @@
+//Used radium.
+//npm install --save radium
+
 import React, { Component } from 'react'
 import './App.css'
 import Person from './Person/Person'
-
+import Radium from 'radium'
 
 
 
@@ -56,11 +59,11 @@ class App extends Component {
 		font: 'inherit',
 		border: '1px solid blue',
 		padding: '8px',
-		cursor: 'pointer'
-    // ':hover': {
-    //   backgroundColor: 'lightgreen',
-    //   color: 'black'
-    // }
+		cursor: 'pointer',
+    ':hover': {
+      backgroundColor: 'lightgreen',
+      color: 'black'
+    }
   }
   
   let persons = null;
@@ -103,11 +106,9 @@ class App extends Component {
         <button style={style} onClick={() => this.togglePersonsHandler()}>Toggle Persons</button>
         {persons}  
       </div>
-    )
+    );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
-//Last commit.
-
-export default App
+export default Radium(App)
